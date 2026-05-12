@@ -1,12 +1,313 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
-    <title>Senac</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abissos Lendários</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#04131f;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    header{
+      height:100vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+      url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1600&auto=format&fit=crop') center/cover;
+      
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:20px;
+    }
+
+    header h1{
+      font-size:5rem;
+      letter-spacing:4px;
+      color:#6be7ff;
+      text-shadow:0 0 25px #00c3ff;
+    }
+
+    header p{
+      margin-top:20px;
+      max-width:700px;
+      font-size:1.2rem;
+      line-height:1.7;
+      color:#d8f6ff;
+    }
+
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      padding:20px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(0,0,0,0.3);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+    }
+
+    nav h2{
+      color:#6be7ff;
+    }
+
+    nav ul{
+      display:flex;
+      gap:25px;
+      list-style:none;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      color:#6be7ff;
+    }
+
+    section{
+      padding:100px 10%;
+    }
+
+    .titulo{
+      font-size:3rem;
+      margin-bottom:50px;
+      color:#6be7ff;
+      text-align:center;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+      border-radius:20px;
+      overflow:hidden;
+      transition:0.4s;
+      backdrop-filter:blur(8px);
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 30px rgba(0,195,255,0.4);
+    }
+
+    .card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:25px;
+    }
+
+    .card h3{
+      margin-bottom:15px;
+      color:#6be7ff;
+    }
+
+    .card p{
+      color:#d3ecf3;
+      line-height:1.6;
+    }
+
+    .historia{
+      background:linear-gradient(to bottom,#04131f,#072437);
+    }
+
+    .historia-container{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:50px;
+    }
+
+    .historia img{
+      width:500px;
+      max-width:100%;
+      border-radius:20px;
+      box-shadow:0 0 40px rgba(0,195,255,0.2);
+    }
+
+    .historia-texto{
+      flex:1;
+    }
+
+    .historia-texto h2{
+      color:#6be7ff;
+      margin-bottom:20px;
+      font-size:2.5rem;
+    }
+
+    .historia-texto p{
+      line-height:1.8;
+      color:#d3ecf3;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px;
+      background:#020b12;
+      color:#8db9c9;
+    }
+
+    .bolha{
+      position:fixed;
+      bottom:-100px;
+      width:40px;
+      height:40px;
+      background:rgba(107,231,255,0.15);
+      border-radius:50%;
+      animation:subir 10s linear infinite;
+      z-index:-1;
+    }
+
+    @keyframes subir{
+      0%{
+        transform:translateY(0) scale(1);
+        opacity:0;
+      }
+
+      50%{
+        opacity:1;
+      }
+
+      100%{
+        transform:translateY(-120vh) scale(1.5);
+        opacity:0;
+      }
+    }
+
+  </style>
 </head>
+
 <body>
-    Olá mundo!
+
+  <nav>
+    <h2>🌊 Abissos Lendários</h2>
+
+    <ul>
+      <li><a href="#">Início</a></li>
+      <li><a href="#">Criaturas</a></li>
+      <li><a href="#">Lendas</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <h1>ABISSOS LENDÁRIOS</h1>
+
+    <p>
+      Entre águas escuras e profundezas esquecidas, vivem criaturas tão estranhas
+      que parecem arrancadas de mitos antigos. O oceano é um grimório líquido,
+      cheio de monstros reais que desafiam a imaginação humana.
+    </p>
+  </header>
+
+  <section>
+    <h2 class="titulo">Criaturas das Profundezas</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h3>Lula Colossal</h3>
+
+          <p>
+            Um titã do oceano profundo. Seus olhos gigantescos parecem faróis
+            perdidos vagando no vazio abissal.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h3>Peixe-Pescador</h3>
+
+          <p>
+            Uma criatura saída diretamente de um pesadelo bioluminescente.
+            Sua luz dança como isca no escuro infinito.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="card-content">
+          <h3>Tubarão-Duende</h3>
+
+          <p>
+            Chamado de “fóssil vivo”, possui mandíbula expansível e aparência
+            digna de uma antiga maldição marítima.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="historia">
+
+    <div class="historia-container">
+
+      <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?q=80&w=1200&auto=format&fit=crop">
+
+      <div class="historia-texto">
+        <h2>O Oceano Nunca Foi Silencioso</h2>
+
+        <p>
+          Durante séculos, marinheiros acreditaram que monstros marinhos habitavam
+          regiões inalcançáveis do planeta. O curioso é que muitos desses “mitos”
+          eram apenas encontros reais com espécies desconhecidas.
+          <br><br>
+          O oceano profundo continua sendo uma catedral escura e inexplorada,
+          onde criaturas translúcidas, gigantescas e bioluminescentes vagam
+          como fantasmas alienígenas sob toneladas de água.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    🌑 Abissos Lendários • Template conceitual inspirado nos horrores reais do oceano
+  </footer>
+
+  <!-- Bolhas animadas -->
+
+  <div class="bolha" style="left:10%; animation-duration:8s;"></div>
+  <div class="bolha" style="left:30%; animation-duration:12s;"></div>
+  <div class="bolha" style="left:50%; animation-duration:10s;"></div>
+  <div class="bolha" style="left:70%; animation-duration:14s;"></div>
+  <div class="bolha" style="left:90%; animation-duration:9s;"></div>
+
 </body>
 </html>
