@@ -1,313 +1,536 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abissos Lendários</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, sans-serif;
-    }
+<title>Maré Abissal - Card Game</title>
 
-    body{
-      background:#04131f;
-      color:white;
-      overflow-x:hidden;
-    }
+<style>
 
-    header{
-      height:100vh;
-      background:
-      linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
-      url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1600&auto=format&fit=crop') center/cover;
-      
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:20px;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
 
-    header h1{
-      font-size:5rem;
-      letter-spacing:4px;
-      color:#6be7ff;
-      text-shadow:0 0 25px #00c3ff;
-    }
+body{
+    background:
+    radial-gradient(circle at top, #0f3b52 0%, #04131f 60%, #01070d 100%);
+    
+    min-height:100vh;
+    overflow-x:hidden;
+    color:white;
+}
 
-    header p{
-      margin-top:20px;
-      max-width:700px;
-      font-size:1.2rem;
-      line-height:1.7;
-      color:#d8f6ff;
-    }
+/* NAVBAR */
 
-    nav{
-      position:fixed;
-      width:100%;
-      top:0;
-      left:0;
-      padding:20px 50px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:rgba(0,0,0,0.3);
-      backdrop-filter:blur(10px);
-      z-index:1000;
-    }
+nav{
+    width:100%;
+    padding:25px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    background:rgba(0,0,0,0.25);
+    backdrop-filter:blur(12px);
+    z-index:999;
+}
 
-    nav h2{
-      color:#6be7ff;
-    }
+.logo{
+    font-size:2rem;
+    color:#7cecff;
+    font-weight:bold;
+    letter-spacing:2px;
+}
 
-    nav ul{
-      display:flex;
-      gap:25px;
-      list-style:none;
-    }
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
 
-    nav a{
-      color:white;
-      text-decoration:none;
-      transition:0.3s;
-    }
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+}
 
-    nav a:hover{
-      color:#6be7ff;
-    }
+nav a:hover{
+    color:#7cecff;
+}
 
-    section{
-      padding:100px 10%;
-    }
+/* HERO */
 
-    .titulo{
-      font-size:3rem;
-      margin-bottom:50px;
-      color:#6be7ff;
-      text-align:center;
-    }
+.hero{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+    flex-direction:column;
+}
 
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-      gap:30px;
-    }
+.hero h1{
+    font-size:5rem;
+    color:#7cecff;
+    text-shadow:0 0 25px #00bfff;
+    margin-bottom:20px;
+}
 
-    .card{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.1);
-      border-radius:20px;
-      overflow:hidden;
-      transition:0.4s;
-      backdrop-filter:blur(8px);
-    }
+.hero p{
+    max-width:700px;
+    line-height:1.8;
+    font-size:1.2rem;
+    color:#d8f7ff;
+}
 
-    .card:hover{
-      transform:translateY(-10px);
-      box-shadow:0 0 30px rgba(0,195,255,0.4);
-    }
+.hero button{
+    margin-top:35px;
+    padding:15px 35px;
+    border:none;
+    border-radius:50px;
+    background:#0fc8ff;
+    color:#021018;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.4s;
+    font-size:1rem;
+}
 
-    .card img{
-      width:100%;
-      height:250px;
-      object-fit:cover;
-    }
+.hero button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px #00d9ff;
+}
 
-    .card-content{
-      padding:25px;
-    }
+/* SECTION */
 
-    .card h3{
-      margin-bottom:15px;
-      color:#6be7ff;
-    }
+section{
+    padding:100px 8%;
+}
 
-    .card p{
-      color:#d3ecf3;
-      line-height:1.6;
-    }
+.titulo{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:60px;
+    color:#7cecff;
+}
 
-    .historia{
-      background:linear-gradient(to bottom,#04131f,#072437);
-    }
+/* CARDS */
 
-    .historia-container{
-      display:flex;
-      flex-wrap:wrap;
-      align-items:center;
-      gap:50px;
-    }
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:40px;
+}
 
-    .historia img{
-      width:500px;
-      max-width:100%;
-      border-radius:20px;
-      box-shadow:0 0 40px rgba(0,195,255,0.2);
-    }
+/* CARD */
 
-    .historia-texto{
-      flex:1;
-    }
+.card{
+    height:430px;
+    border-radius:25px;
+    overflow:hidden;
+    position:relative;
+    background:
+    linear-gradient(180deg,#0e2533,#061019);
+    
+    border:2px solid rgba(124,236,255,0.2);
 
-    .historia-texto h2{
-      color:#6be7ff;
-      margin-bottom:20px;
-      font-size:2.5rem;
-    }
+    transition:0.5s;
+    cursor:pointer;
+}
 
-    .historia-texto p{
-      line-height:1.8;
-      color:#d3ecf3;
-    }
+.card:hover{
+    transform:translateY(-12px) rotate(-1deg);
+    box-shadow:0 0 40px rgba(0,217,255,0.35);
+}
 
-    footer{
-      text-align:center;
-      padding:40px;
-      background:#020b12;
-      color:#8db9c9;
-    }
+.card-topo{
+    height:55%;
+    position:relative;
+}
 
-    .bolha{
-      position:fixed;
-      bottom:-100px;
-      width:40px;
-      height:40px;
-      background:rgba(107,231,255,0.15);
-      border-radius:50%;
-      animation:subir 10s linear infinite;
-      z-index:-1;
-    }
+.card-topo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
 
-    @keyframes subir{
-      0%{
+.raridade{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:#00d0ff;
+    color:#001018;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:0.8rem;
+    font-weight:bold;
+}
+
+.card-conteudo{
+    padding:20px;
+}
+
+.card-conteudo h3{
+    color:#7cecff;
+    margin-bottom:10px;
+    font-size:1.5rem;
+}
+
+.card-conteudo p{
+    color:#cfeef7;
+    line-height:1.6;
+    font-size:0.95rem;
+}
+
+/* STATUS */
+
+.status{
+    margin-top:20px;
+}
+
+.barra{
+    margin-bottom:12px;
+}
+
+.barra span{
+    font-size:0.9rem;
+}
+
+.progress{
+    width:100%;
+    height:10px;
+    background:#0b1a24;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:5px;
+}
+
+.progress div{
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(to right,#00c8ff,#7cecff);
+}
+
+/* LORE */
+
+.lore{
+    display:flex;
+    gap:60px;
+    flex-wrap:wrap;
+    align-items:center;
+}
+
+.lore img{
+    width:500px;
+    max-width:100%;
+    border-radius:25px;
+    box-shadow:0 0 40px rgba(0,217,255,0.25);
+}
+
+.lore-texto{
+    flex:1;
+}
+
+.lore-texto h2{
+    font-size:3rem;
+    color:#7cecff;
+    margin-bottom:20px;
+}
+
+.lore-texto p{
+    line-height:1.9;
+    color:#d3f0f8;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:40px;
+    background:#01070d;
+    color:#83b7c7;
+}
+
+/* BOLHAS */
+
+.bolha{
+    position:fixed;
+    width:30px;
+    height:30px;
+    background:rgba(124,236,255,0.12);
+    border-radius:50%;
+    bottom:-100px;
+    animation:subir linear infinite;
+    z-index:-1;
+}
+
+@keyframes subir{
+
+    0%{
         transform:translateY(0) scale(1);
         opacity:0;
-      }
-
-      50%{
-        opacity:1;
-      }
-
-      100%{
-        transform:translateY(-120vh) scale(1.5);
-        opacity:0;
-      }
     }
 
-  </style>
+    50%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-120vh) scale(1.7);
+        opacity:0;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <nav>
-    <h2>🌊 Abissos Lendários</h2>
+<nav>
 
-    <ul>
-      <li><a href="#">Início</a></li>
-      <li><a href="#">Criaturas</a></li>
-      <li><a href="#">Lendas</a></li>
-      <li><a href="#">Contato</a></li>
-    </ul>
-  </nav>
+<div class="logo">🌊 MARÉ ABISSAL</div>
 
-  <header>
-    <h1>ABISSOS LENDÁRIOS</h1>
+<ul>
+<li><a href="#">Início</a></li>
+<li><a href="#">Cartas</a></li>
+<li><a href="#">Facções</a></li>
+<li><a href="#">Lore</a></li>
+</ul>
 
-    <p>
-      Entre águas escuras e profundezas esquecidas, vivem criaturas tão estranhas
-      que parecem arrancadas de mitos antigos. O oceano é um grimório líquido,
-      cheio de monstros reais que desafiam a imaginação humana.
-    </p>
-  </header>
+</nav>
 
-  <section>
-    <h2 class="titulo">Criaturas das Profundezas</h2>
+<section class="hero">
 
-    <div class="cards">
+<h1>MARÉ ABISSAL</h1>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=1200&auto=format&fit=crop">
+<p>
+Um card game estratégico onde criaturas marinhas ancestrais despertam
+das profundezas para dominar os oceanos esquecidos.
+Cada carta carrega um fragmento do abismo.
+</p>
 
-        <div class="card-content">
-          <h3>Lula Colossal</h3>
+<button>Explorar Deck</button>
 
-          <p>
-            Um titã do oceano profundo. Seus olhos gigantescos parecem faróis
-            perdidos vagando no vazio abissal.
-          </p>
-        </div>
-      </div>
+</section>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=1200&auto=format&fit=crop">
+<section>
 
-        <div class="card-content">
-          <h3>Peixe-Pescador</h3>
+<h2 class="titulo">Cartas Lendárias</h2>
 
-          <p>
-            Uma criatura saída diretamente de um pesadelo bioluminescente.
-            Sua luz dança como isca no escuro infinito.
-          </p>
-        </div>
-      </div>
+<div class="cards">
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1524704654690-b56c05c78a00?q=80&w=1200&auto=format&fit=crop">
+<!-- CARD 1 -->
 
-        <div class="card-content">
-          <h3>Tubarão-Duende</h3>
+<div class="card">
 
-          <p>
-            Chamado de “fóssil vivo”, possui mandíbula expansível e aparência
-            digna de uma antiga maldição marítima.
-          </p>
-        </div>
-      </div>
+<div class="card-topo">
+<img src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=1200&auto=format&fit=crop">
 
-    </div>
-  </section>
+<div class="raridade">
+LENDÁRIA
+</div>
 
-  <section class="historia">
+</div>
 
-    <div class="historia-container">
+<div class="card-conteudo">
 
-      <img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?q=80&w=1200&auto=format&fit=crop">
+<h3>Leviatã Abissal</h3>
 
-      <div class="historia-texto">
-        <h2>O Oceano Nunca Foi Silencioso</h2>
+<p>
+Uma entidade colossal capaz de afundar frotas inteiras
+com o simples movimento de sua cauda.
+</p>
 
-        <p>
-          Durante séculos, marinheiros acreditaram que monstros marinhos habitavam
-          regiões inalcançáveis do planeta. O curioso é que muitos desses “mitos”
-          eram apenas encontros reais com espécies desconhecidas.
-          <br><br>
-          O oceano profundo continua sendo uma catedral escura e inexplorada,
-          onde criaturas translúcidas, gigantescas e bioluminescentes vagam
-          como fantasmas alienígenas sob toneladas de água.
-        </p>
-      </div>
+<div class="status">
 
-    </div>
+<div class="barra">
+<span>Ataque</span>
 
-  </section>
+<div class="progress">
+<div style="width:95%"></div>
+</div>
+</div>
 
-  <footer>
-    🌑 Abissos Lendários • Template conceitual inspirado nos horrores reais do oceano
-  </footer>
+<div class="barra">
+<span>Defesa</span>
 
-  <!-- Bolhas animadas -->
+<div class="progress">
+<div style="width:85%"></div>
+</div>
+</div>
 
-  <div class="bolha" style="left:10%; animation-duration:8s;"></div>
-  <div class="bolha" style="left:30%; animation-duration:12s;"></div>
-  <div class="bolha" style="left:50%; animation-duration:10s;"></div>
-  <div class="bolha" style="left:70%; animation-duration:14s;"></div>
-  <div class="bolha" style="left:90%; animation-duration:9s;"></div>
+<div class="barra">
+<span>Energia</span>
+
+<div class="progress">
+<div style="width:70%"></div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD 2 -->
+
+<div class="card">
+
+<div class="card-topo">
+<img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?q=80&w=1200&auto=format&fit=crop">
+
+<div class="raridade">
+ÉPICA
+</div>
+
+</div>
+
+<div class="card-conteudo">
+
+<h3>Serpente Coralina</h3>
+
+<p>
+Seu corpo cristalino reflete luzes oceânicas como
+uma aurora perdida sob as águas.
+</p>
+
+<div class="status">
+
+<div class="barra">
+<span>Ataque</span>
+
+<div class="progress">
+<div style="width:70%"></div>
+</div>
+</div>
+
+<div class="barra">
+<span>Defesa</span>
+
+<div class="progress">
+<div style="width:60%"></div>
+</div>
+</div>
+
+<div class="barra">
+<span>Energia</span>
+
+<div class="progress">
+<div style="width:95%"></div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="card">
+
+<div class="card-topo">
+<img src="https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=1200&auto=format&fit=crop">
+
+<div class="raridade">
+RARO
+</div>
+
+</div>
+
+<div class="card-conteudo">
+
+<h3>Lula Fantasma</h3>
+
+<p>
+Criatura silenciosa das fossas oceânicas.
+Dizem que seus olhos enxergam memórias.
+</p>
+
+<div class="status">
+
+<div class="barra">
+<span>Ataque</span>
+
+<div class="progress">
+<div style="width:65%"></div>
+</div>
+</div>
+
+<div class="barra">
+<span>Defesa</span>
+
+<div class="progress">
+<div style="width:50%"></div>
+</div>
+</div>
+
+<div class="barra">
+<span>Energia</span>
+
+<div class="progress">
+<div style="width:90%"></div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="lore">
+
+<img src="https://images.unsplash.com/photo-1498623116890-37e912163d5d?q=80&w=1200&auto=format&fit=crop">
+
+<div class="lore-texto">
+
+<h2>O Chamado do Oceano</h2>
+
+<p>
+Após o colapso das civilizações costeiras, o oceano começou
+a revelar criaturas esquecidas pelo tempo.
+As profundezas deixaram de ser um vazio silencioso
+e se tornaram um reino vivo de titãs, híbridos e horrores bioluminescentes.
+<br><br>
+Em Maré Abissal, jogadores montam decks inspirados em
+facções oceânicas antigas, utilizando criaturas míticas,
+tempestades marinhas e relíquias submersas para conquistar territórios.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+🌊 Maré Abissal • Conceito visual de card game oceânico
+
+</footer>
+
+<!-- BOLHAS -->
+
+<div class="bolha" style="left:10%; animation-duration:8s;"></div>
+<div class="bolha" style="left:30%; animation-duration:12s;"></div>
+<div class="bolha" style="left:50%; animation-duration:10s;"></div>
+<div class="bolha" style="left:70%; animation-duration:15s;"></div>
+<div class="bolha" style="left:90%; animation-duration:9s;"></div>
 
 </body>
 </html>
