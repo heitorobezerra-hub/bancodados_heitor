@@ -1,266 +1,373 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MONSTER HUNT RPG</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batman | Gotham City</title>
 
   <style>
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
     }
 
     body{
-      background:
-      linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
-      url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=1920&auto=format&fit=crop');
-      background-size: cover;
-      background-attachment: fixed;
+      overflow:hidden;
+      background:linear-gradient(to bottom, #050505, #111);
+      height:100vh;
       color:white;
+      position:relative;
     }
 
-    header{
-      height:100vh;
+    /* CHUVA */
+
+    .rain{
+      position:absolute;
+      width:2px;
+      height:100px;
+      background:linear-gradient(transparent, rgba(255,255,255,0.7));
+      animation:rain 0.5s linear infinite;
+      opacity:0.5;
+    }
+
+    @keyframes rain{
+      from{
+        transform:translateY(-100vh);
+      }
+      to{
+        transform:translateY(100vh);
+      }
+    }
+
+    /* TROVÃO */
+
+    .lightning{
+      position:absolute;
+      width:100%;
+      height:100%;
+      background:white;
+      opacity:0;
+      animation:flash 7s infinite;
+      pointer-events:none;
+    }
+
+    @keyframes flash{
+      0%,95%,100%{
+        opacity:0;
+      }
+
+      96%{
+        opacity:0.7;
+      }
+
+      97%{
+        opacity:0;
+      }
+
+      98%{
+        opacity:0.4;
+      }
+    }
+
+    /* CIDADE */
+
+    .city{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:250px;
       display:flex;
-      flex-direction:column;
+      align-items:flex-end;
+      z-index:1;
+    }
+
+    .building{
+      background:#0d0d0d;
+      border:2px solid #222;
+      width:120px;
+      margin:0 5px;
+      position:relative;
+      box-shadow:0 0 20px black;
+    }
+
+    .window{
+      width:12px;
+      height:12px;
+      background:gold;
+      position:absolute;
+      animation:flicker 2s infinite alternate;
+    }
+
+    @keyframes flicker{
+      from{
+        opacity:1;
+      }
+      to{
+        opacity:0.3;
+      }
+    }
+
+    /* BATMAN */
+
+    .batman{
+      position:absolute;
+      bottom:120px;
+      left:50%;
+      transform:translateX(-50%);
+      width:350px;
+      z-index:5;
+      animation:float 4s ease-in-out infinite;
+      filter:drop-shadow(0 0 25px rgba(255,255,255,0.1));
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateX(-50%) translateY(0);
+      }
+
+      50%{
+        transform:translateX(-50%) translateY(-10px);
+      }
+
+      100%{
+        transform:translateX(-50%) translateY(0);
+      }
+    }
+
+    /* BAT SINAL */
+
+    .bat-signal{
+      position:absolute;
+      top:70px;
+      right:120px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,180,0.95), rgba(255,255,180,0.1));
+      display:flex;
       justify-content:center;
       align-items:center;
-      text-align:center;
-      padding:20px;
+      transform:rotate(-15deg);
+      animation:pulse 4s infinite;
+      box-shadow:0 0 80px rgba(255,255,150,0.4);
+      z-index:2;
     }
 
-    header h1{
-      font-size:5rem;
-      color:#ff3c00;
-      text-shadow:0 0 20px #ff3c00;
-      letter-spacing:5px;
+    .bat-signal::before{
+      content:"🦇";
+      font-size:90px;
+      color:black;
+      text-shadow:none;
     }
 
-    header p{
-      margin-top:20px;
-      font-size:1.3rem;
-      max-width:700px;
-      color:#ddd;
+    @keyframes pulse{
+      0%{
+        transform:rotate(-15deg) scale(1);
+      }
+
+      50%{
+        transform:rotate(-15deg) scale(1.05);
+      }
+
+      100%{
+        transform:rotate(-15deg) scale(1);
+      }
+    }
+
+    /* TEXTO */
+
+    .content{
+      position:absolute;
+      top:50%;
+      left:80px;
+      transform:translateY(-50%);
+      z-index:10;
+      max-width:600px;
+    }
+
+    .content h1{
+      font-size:90px;
+      letter-spacing:8px;
+      color:#f5f5f5;
+      text-shadow:
+      0 0 10px rgba(255,255,255,0.3),
+      0 0 40px rgba(255,255,255,0.1);
+    }
+
+    .content h2{
+      color:#999;
+      margin-bottom:20px;
+      letter-spacing:4px;
+    }
+
+    .content p{
+      line-height:1.7;
+      color:#ccc;
+      font-size:18px;
     }
 
     .btn{
+      display:inline-block;
       margin-top:30px;
-      padding:15px 40px;
-      background:#ff3c00;
+      padding:15px 35px;
+      background:#111;
+      border:2px solid #666;
       color:white;
       text-decoration:none;
-      border-radius:10px;
-      font-weight:bold;
-      transition:0.3s;
-      box-shadow:0 0 15px #ff3c00;
+      transition:0.4s;
+      letter-spacing:2px;
     }
 
     .btn:hover{
-      transform:scale(1.1);
-      background:#ff6a00;
-    }
-
-    section{
-      padding:80px 10%;
-    }
-
-    .titulo{
-      font-size:3rem;
-      margin-bottom:40px;
-      color:#ff3c00;
-      text-align:center;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
-      gap:30px;
-    }
-
-    .card{
-      background:rgba(255,255,255,0.08);
-      border:1px solid rgba(255,255,255,0.1);
-      backdrop-filter:blur(8px);
-      border-radius:20px;
-      padding:25px;
-      transition:0.4s;
-    }
-
-    .card:hover{
-      transform:translateY(-10px);
-      box-shadow:0 0 20px rgba(255,60,0,0.6);
-    }
-
-    .card h2{
-      margin-bottom:15px;
-      color:#ff6a00;
-    }
-
-    .monstros{
-      display:flex;
-      flex-wrap:wrap;
-      gap:30px;
-      justify-content:center;
-    }
-
-    .monstro{
-      width:300px;
-      background:rgba(0,0,0,0.6);
-      border-radius:20px;
-      overflow:hidden;
-      transition:0.4s;
-      border:1px solid rgba(255,255,255,0.1);
-    }
-
-    .monstro:hover{
+      background:#f0c000;
+      color:black;
       transform:scale(1.05);
-      box-shadow:0 0 25px #ff3c00;
+      box-shadow:0 0 20px gold;
     }
 
-    .monstro img{
-      width:100%;
-      height:220px;
-      object-fit:cover;
+    /* LEGO BATMAN EASTER EGG */
+
+    .lego{
+      position:absolute;
+      bottom:15px;
+      right:15px;
+      font-size:18px;
+      cursor:pointer;
+      opacity:0.2;
+      transition:0.5s;
+      z-index:100;
     }
 
-    .monstro-info{
-      padding:20px;
+    .lego:hover{
+      opacity:1;
+      transform:scale(1.2) rotate(10deg);
     }
 
-    .monstro-info h3{
-      color:#ff3c00;
-      margin-bottom:10px;
+    .lego-message{
+      position:absolute;
+      bottom:60px;
+      right:20px;
+      background:rgba(0,0,0,0.9);
+      border:2px solid yellow;
+      padding:15px;
+      width:250px;
+      display:none;
+      z-index:101;
+      color:white;
+      border-radius:10px;
+      box-shadow:0 0 20px yellow;
     }
 
-    footer{
-      text-align:center;
-      padding:30px;
-      background:rgba(0,0,0,0.8);
-      color:#999;
+    .lego:hover + .lego-message{
+      display:block;
     }
 
-    .glow{
-      color:#ff3c00;
-      text-shadow:0 0 10px #ff3c00;
-    }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>MONSTER HUNT</h1>
+  <!-- TROVÃO -->
+  <div class="lightning"></div>
+
+  <!-- CHUVA -->
+  <script>
+    for(let i = 0; i < 250; i++){
+
+      let rain = document.createElement("div");
+      rain.classList.add("rain");
+
+      rain.style.left = Math.random() * window.innerWidth + "px";
+      rain.style.animationDuration = (Math.random() * 0.5 + 0.2) + "s";
+      rain.style.opacity = Math.random();
+
+      document.body.appendChild(rain);
+    }
+  </script>
+
+  <!-- BAT SINAL -->
+  <div class="bat-signal"></div>
+
+  <!-- TEXTO -->
+  <div class="content">
+
+    <h1>BATMAN</h1>
+
+    <h2>O CAVALEIRO DAS SOMBRAS</h2>
 
     <p>
-      Entre em um mundo devastado por criaturas ancestrais.
-      Caçe monstros colossais, forje armas proibidas e sobreviva
-      às sombras que rastejam além da névoa.
+      Gotham City nunca dorme.
+      Entre becos úmidos, arranha-céus decadentes e trovões que racham o céu,
+      uma figura emerge das sombras.
+      Não é um herói.
+      Não é um mito.
+      É o medo vestido de preto.
     </p>
 
-    <a href="#classes" class="btn">COMEÇAR CAÇADA</a>
-  </header>
+    <p style="margin-top:20px;">
+      Enquanto criminosos dominam a noite,
+      um homem transforma dor em símbolo.
+      O morcego observa.
+      O morcego caça.
+      O morcego chega antes do último relâmpago tocar o chão.
+    </p>
 
-  <section id="classes">
-    <h1 class="titulo">CLASSES DE CAÇADORES</h1>
+    <a href="#" class="btn">ENTRAR EM GOTHAM</a>
 
-    <div class="cards">
+  </div>
 
-      <div class="card">
-        <h2>⚔ Caçador de Ferro</h2>
-        <p>
-          Guerreiros brutais que enfrentam monstros cara a cara.
-          Especialistas em espadas gigantes e armaduras pesadas.
-        </p>
-      </div>
+  <!-- BATMAN -->
+  <img
+    class="batman"
+    src="https://images.unsplash.com/photo-1635805737707-575885ab0820?q=80&w=1200&auto=format&fit=crop"
+    alt="Batman">
 
-      <div class="card">
-        <h2>🏹 Rastreador Sombrio</h2>
-        <p>
-          Mestres da furtividade. Eliminam criaturas à distância
-          antes mesmo de serem percebidos.
-        </p>
-      </div>
+  <!-- CIDADE -->
+  <div class="city">
 
-      <div class="card">
-        <h2>🔥 Bruxo Carmesim</h2>
-        <p>
-          Manipulam magia proibida usando o sangue dos monstros
-          derrotados como combustível arcano.
-        </p>
-      </div>
-
+    <div class="building" style="height:220px;">
+      <div class="window" style="top:20px; left:20px;"></div>
+      <div class="window" style="top:50px; left:60px;"></div>
+      <div class="window" style="top:100px; left:40px;"></div>
     </div>
-  </section>
 
-  <section>
-    <h1 class="titulo">BESTIÁRIO</h1>
-
-    <div class="monstros">
-
-      <div class="monstro">
-        <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?q=80&w=1200&auto=format&fit=crop">
-
-        <div class="monstro-info">
-          <h3>Dragão Abissal</h3>
-
-          <p>
-            Uma criatura colossal coberta por escamas negras.
-            Seu rugido faz o céu parecer vidro rachando.
-          </p>
-        </div>
-      </div>
-
-      <div class="monstro">
-        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1200&auto=format&fit=crop">
-
-        <div class="monstro-info">
-          <h3>Lobo da Névoa</h3>
-
-          <p>
-            Predador espectral que caça viajantes durante a madrugada.
-            Seus olhos brilham como luas partidas.
-          </p>
-        </div>
-      </div>
-
-      <div class="monstro">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop">
-
-        <div class="monstro-info">
-          <h3>Titã da Floresta</h3>
-
-          <p>
-            Um gigante vivo formado por raízes e ossos antigos.
-            Cada passo parece um terremoto respirando.
-          </p>
-        </div>
-      </div>
-
+    <div class="building" style="height:170px;">
+      <div class="window" style="top:30px; left:30px;"></div>
+      <div class="window" style="top:80px; left:70px;"></div>
     </div>
-  </section>
 
-  <section>
-    <h1 class="titulo">SOBRE O RPG</h1>
-
-    <div class="card">
-      <p style="font-size:1.2rem; line-height:1.8;">
-        <span class="glow">Monster Hunt RPG</span> é um universo sombrio
-        onde humanidade e monstros coexistem em uma guerra eterna.
-        Os jogadores exploram ruínas esquecidas, enfrentam criaturas
-        lendárias e coletam recursos raros para criar equipamentos
-        cada vez mais poderosos.
-        <br><br>
-        Cada caça é uma batalha cinematográfica. Cada cicatriz,
-        uma história sobrevivida.
-      </p>
+    <div class="building" style="height:280px;">
+      <div class="window" style="top:20px; left:20px;"></div>
+      <div class="window" style="top:80px; left:80px;"></div>
+      <div class="window" style="top:150px; left:40px;"></div>
     </div>
-  </section>
 
-  <footer>
-    © 2026 Monster Hunt RPG • “A noite sempre caça de volta.”
-  </footer>
+    <div class="building" style="height:210px;">
+      <div class="window" style="top:60px; left:20px;"></div>
+      <div class="window" style="top:120px; left:70px;"></div>
+    </div>
+
+    <div class="building" style="height:320px;">
+      <div class="window" style="top:40px; left:30px;"></div>
+      <div class="window" style="top:100px; left:70px;"></div>
+      <div class="window" style="top:200px; left:50px;"></div>
+    </div>
+
+  </div>
+
+  <!-- LEGO BATMAN -->
+  <div class="lego">
+    🧱🦇
+  </div>
+
+  <div class="lego-message">
+    <strong>LEGO BATMAN ENCONTRADO!</strong><br><br>
+
+    "Às vezes eu só quero ficar sozinho...
+    comendo lagosta termidor na Batcaverna."
+  </div>
 
 </body>
 </html>
