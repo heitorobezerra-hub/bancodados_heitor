@@ -1,536 +1,266 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MONSTER HUNT RPG</title>
 
-<title>Maré Abissal - Card Game</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
-body{
-    background:
-    radial-gradient(circle at top, #0f3b52 0%, #04131f 60%, #01070d 100%);
-    
-    min-height:100vh;
-    overflow-x:hidden;
-    color:white;
-}
-
-/* NAVBAR */
-
-nav{
-    width:100%;
-    padding:25px 8%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:fixed;
-    top:0;
-    background:rgba(0,0,0,0.25);
-    backdrop-filter:blur(12px);
-    z-index:999;
-}
-
-.logo{
-    font-size:2rem;
-    color:#7cecff;
-    font-weight:bold;
-    letter-spacing:2px;
-}
-
-nav ul{
-    display:flex;
-    gap:25px;
-    list-style:none;
-}
-
-nav a{
-    color:white;
-    text-decoration:none;
-    transition:0.3s;
-}
-
-nav a:hover{
-    color:#7cecff;
-}
-
-/* HERO */
-
-.hero{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:40px;
-    flex-direction:column;
-}
-
-.hero h1{
-    font-size:5rem;
-    color:#7cecff;
-    text-shadow:0 0 25px #00bfff;
-    margin-bottom:20px;
-}
-
-.hero p{
-    max-width:700px;
-    line-height:1.8;
-    font-size:1.2rem;
-    color:#d8f7ff;
-}
-
-.hero button{
-    margin-top:35px;
-    padding:15px 35px;
-    border:none;
-    border-radius:50px;
-    background:#0fc8ff;
-    color:#021018;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.4s;
-    font-size:1rem;
-}
-
-.hero button:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 30px #00d9ff;
-}
-
-/* SECTION */
-
-section{
-    padding:100px 8%;
-}
-
-.titulo{
-    text-align:center;
-    font-size:3rem;
-    margin-bottom:60px;
-    color:#7cecff;
-}
-
-/* CARDS */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:40px;
-}
-
-/* CARD */
-
-.card{
-    height:430px;
-    border-radius:25px;
-    overflow:hidden;
-    position:relative;
-    background:
-    linear-gradient(180deg,#0e2533,#061019);
-    
-    border:2px solid rgba(124,236,255,0.2);
-
-    transition:0.5s;
-    cursor:pointer;
-}
-
-.card:hover{
-    transform:translateY(-12px) rotate(-1deg);
-    box-shadow:0 0 40px rgba(0,217,255,0.35);
-}
-
-.card-topo{
-    height:55%;
-    position:relative;
-}
-
-.card-topo img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.raridade{
-    position:absolute;
-    top:15px;
-    right:15px;
-    background:#00d0ff;
-    color:#001018;
-    padding:6px 14px;
-    border-radius:30px;
-    font-size:0.8rem;
-    font-weight:bold;
-}
-
-.card-conteudo{
-    padding:20px;
-}
-
-.card-conteudo h3{
-    color:#7cecff;
-    margin-bottom:10px;
-    font-size:1.5rem;
-}
-
-.card-conteudo p{
-    color:#cfeef7;
-    line-height:1.6;
-    font-size:0.95rem;
-}
-
-/* STATUS */
-
-.status{
-    margin-top:20px;
-}
-
-.barra{
-    margin-bottom:12px;
-}
-
-.barra span{
-    font-size:0.9rem;
-}
-
-.progress{
-    width:100%;
-    height:10px;
-    background:#0b1a24;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:5px;
-}
-
-.progress div{
-    height:100%;
-    border-radius:20px;
-    background:linear-gradient(to right,#00c8ff,#7cecff);
-}
-
-/* LORE */
-
-.lore{
-    display:flex;
-    gap:60px;
-    flex-wrap:wrap;
-    align-items:center;
-}
-
-.lore img{
-    width:500px;
-    max-width:100%;
-    border-radius:25px;
-    box-shadow:0 0 40px rgba(0,217,255,0.25);
-}
-
-.lore-texto{
-    flex:1;
-}
-
-.lore-texto h2{
-    font-size:3rem;
-    color:#7cecff;
-    margin-bottom:20px;
-}
-
-.lore-texto p{
-    line-height:1.9;
-    color:#d3f0f8;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:40px;
-    background:#01070d;
-    color:#83b7c7;
-}
-
-/* BOLHAS */
-
-.bolha{
-    position:fixed;
-    width:30px;
-    height:30px;
-    background:rgba(124,236,255,0.12);
-    border-radius:50%;
-    bottom:-100px;
-    animation:subir linear infinite;
-    z-index:-1;
-}
-
-@keyframes subir{
-
-    0%{
-        transform:translateY(0) scale(1);
-        opacity:0;
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    50%{
-        opacity:1;
+    body{
+      background:
+      linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+      url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=1920&auto=format&fit=crop');
+      background-size: cover;
+      background-attachment: fixed;
+      color:white;
     }
 
-    100%{
-        transform:translateY(-120vh) scale(1.7);
-        opacity:0;
+    header{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:20px;
     }
 
-}
+    header h1{
+      font-size:5rem;
+      color:#ff3c00;
+      text-shadow:0 0 20px #ff3c00;
+      letter-spacing:5px;
+    }
 
-</style>
+    header p{
+      margin-top:20px;
+      font-size:1.3rem;
+      max-width:700px;
+      color:#ddd;
+    }
+
+    .btn{
+      margin-top:30px;
+      padding:15px 40px;
+      background:#ff3c00;
+      color:white;
+      text-decoration:none;
+      border-radius:10px;
+      font-weight:bold;
+      transition:0.3s;
+      box-shadow:0 0 15px #ff3c00;
+    }
+
+    .btn:hover{
+      transform:scale(1.1);
+      background:#ff6a00;
+    }
+
+    section{
+      padding:80px 10%;
+    }
+
+    .titulo{
+      font-size:3rem;
+      margin-bottom:40px;
+      color:#ff3c00;
+      text-align:center;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.1);
+      backdrop-filter:blur(8px);
+      border-radius:20px;
+      padding:25px;
+      transition:0.4s;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      box-shadow:0 0 20px rgba(255,60,0,0.6);
+    }
+
+    .card h2{
+      margin-bottom:15px;
+      color:#ff6a00;
+    }
+
+    .monstros{
+      display:flex;
+      flex-wrap:wrap;
+      gap:30px;
+      justify-content:center;
+    }
+
+    .monstro{
+      width:300px;
+      background:rgba(0,0,0,0.6);
+      border-radius:20px;
+      overflow:hidden;
+      transition:0.4s;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    .monstro:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 25px #ff3c00;
+    }
+
+    .monstro img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .monstro-info{
+      padding:20px;
+    }
+
+    .monstro-info h3{
+      color:#ff3c00;
+      margin-bottom:10px;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      background:rgba(0,0,0,0.8);
+      color:#999;
+    }
+
+    .glow{
+      color:#ff3c00;
+      text-shadow:0 0 10px #ff3c00;
+    }
+  </style>
 </head>
-
 <body>
 
-<nav>
-
-<div class="logo">🌊 MARÉ ABISSAL</div>
-
-<ul>
-<li><a href="#">Início</a></li>
-<li><a href="#">Cartas</a></li>
-<li><a href="#">Facções</a></li>
-<li><a href="#">Lore</a></li>
-</ul>
-
-</nav>
-
-<section class="hero">
-
-<h1>MARÉ ABISSAL</h1>
-
-<p>
-Um card game estratégico onde criaturas marinhas ancestrais despertam
-das profundezas para dominar os oceanos esquecidos.
-Cada carta carrega um fragmento do abismo.
-</p>
-
-<button>Explorar Deck</button>
-
-</section>
-
-<section>
-
-<h2 class="titulo">Cartas Lendárias</h2>
-
-<div class="cards">
-
-<!-- CARD 1 -->
-
-<div class="card">
-
-<div class="card-topo">
-<img src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=1200&auto=format&fit=crop">
-
-<div class="raridade">
-LENDÁRIA
-</div>
-
-</div>
-
-<div class="card-conteudo">
-
-<h3>Leviatã Abissal</h3>
-
-<p>
-Uma entidade colossal capaz de afundar frotas inteiras
-com o simples movimento de sua cauda.
-</p>
-
-<div class="status">
-
-<div class="barra">
-<span>Ataque</span>
-
-<div class="progress">
-<div style="width:95%"></div>
-</div>
-</div>
-
-<div class="barra">
-<span>Defesa</span>
-
-<div class="progress">
-<div style="width:85%"></div>
-</div>
-</div>
-
-<div class="barra">
-<span>Energia</span>
-
-<div class="progress">
-<div style="width:70%"></div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- CARD 2 -->
-
-<div class="card">
-
-<div class="card-topo">
-<img src="https://images.unsplash.com/photo-1518391846015-55a9cc003b25?q=80&w=1200&auto=format&fit=crop">
-
-<div class="raridade">
-ÉPICA
-</div>
-
-</div>
-
-<div class="card-conteudo">
-
-<h3>Serpente Coralina</h3>
-
-<p>
-Seu corpo cristalino reflete luzes oceânicas como
-uma aurora perdida sob as águas.
-</p>
-
-<div class="status">
-
-<div class="barra">
-<span>Ataque</span>
-
-<div class="progress">
-<div style="width:70%"></div>
-</div>
-</div>
-
-<div class="barra">
-<span>Defesa</span>
-
-<div class="progress">
-<div style="width:60%"></div>
-</div>
-</div>
-
-<div class="barra">
-<span>Energia</span>
-
-<div class="progress">
-<div style="width:95%"></div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- CARD 3 -->
-
-<div class="card">
-
-<div class="card-topo">
-<img src="https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=1200&auto=format&fit=crop">
-
-<div class="raridade">
-RARO
-</div>
-
-</div>
-
-<div class="card-conteudo">
-
-<h3>Lula Fantasma</h3>
-
-<p>
-Criatura silenciosa das fossas oceânicas.
-Dizem que seus olhos enxergam memórias.
-</p>
-
-<div class="status">
-
-<div class="barra">
-<span>Ataque</span>
-
-<div class="progress">
-<div style="width:65%"></div>
-</div>
-</div>
-
-<div class="barra">
-<span>Defesa</span>
-
-<div class="progress">
-<div style="width:50%"></div>
-</div>
-</div>
-
-<div class="barra">
-<span>Energia</span>
-
-<div class="progress">
-<div style="width:90%"></div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<div class="lore">
-
-<img src="https://images.unsplash.com/photo-1498623116890-37e912163d5d?q=80&w=1200&auto=format&fit=crop">
-
-<div class="lore-texto">
-
-<h2>O Chamado do Oceano</h2>
-
-<p>
-Após o colapso das civilizações costeiras, o oceano começou
-a revelar criaturas esquecidas pelo tempo.
-As profundezas deixaram de ser um vazio silencioso
-e se tornaram um reino vivo de titãs, híbridos e horrores bioluminescentes.
-<br><br>
-Em Maré Abissal, jogadores montam decks inspirados em
-facções oceânicas antigas, utilizando criaturas míticas,
-tempestades marinhas e relíquias submersas para conquistar territórios.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<footer>
-
-🌊 Maré Abissal • Conceito visual de card game oceânico
-
-</footer>
-
-<!-- BOLHAS -->
-
-<div class="bolha" style="left:10%; animation-duration:8s;"></div>
-<div class="bolha" style="left:30%; animation-duration:12s;"></div>
-<div class="bolha" style="left:50%; animation-duration:10s;"></div>
-<div class="bolha" style="left:70%; animation-duration:15s;"></div>
-<div class="bolha" style="left:90%; animation-duration:9s;"></div>
+  <header>
+    <h1>MONSTER HUNT</h1>
+
+    <p>
+      Entre em um mundo devastado por criaturas ancestrais.
+      Caçe monstros colossais, forje armas proibidas e sobreviva
+      às sombras que rastejam além da névoa.
+    </p>
+
+    <a href="#classes" class="btn">COMEÇAR CAÇADA</a>
+  </header>
+
+  <section id="classes">
+    <h1 class="titulo">CLASSES DE CAÇADORES</h1>
+
+    <div class="cards">
+
+      <div class="card">
+        <h2>⚔ Caçador de Ferro</h2>
+        <p>
+          Guerreiros brutais que enfrentam monstros cara a cara.
+          Especialistas em espadas gigantes e armaduras pesadas.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>🏹 Rastreador Sombrio</h2>
+        <p>
+          Mestres da furtividade. Eliminam criaturas à distância
+          antes mesmo de serem percebidos.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>🔥 Bruxo Carmesim</h2>
+        <p>
+          Manipulam magia proibida usando o sangue dos monstros
+          derrotados como combustível arcano.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h1 class="titulo">BESTIÁRIO</h1>
+
+    <div class="monstros">
+
+      <div class="monstro">
+        <img src="https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="monstro-info">
+          <h3>Dragão Abissal</h3>
+
+          <p>
+            Uma criatura colossal coberta por escamas negras.
+            Seu rugido faz o céu parecer vidro rachando.
+          </p>
+        </div>
+      </div>
+
+      <div class="monstro">
+        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="monstro-info">
+          <h3>Lobo da Névoa</h3>
+
+          <p>
+            Predador espectral que caça viajantes durante a madrugada.
+            Seus olhos brilham como luas partidas.
+          </p>
+        </div>
+      </div>
+
+      <div class="monstro">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop">
+
+        <div class="monstro-info">
+          <h3>Titã da Floresta</h3>
+
+          <p>
+            Um gigante vivo formado por raízes e ossos antigos.
+            Cada passo parece um terremoto respirando.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h1 class="titulo">SOBRE O RPG</h1>
+
+    <div class="card">
+      <p style="font-size:1.2rem; line-height:1.8;">
+        <span class="glow">Monster Hunt RPG</span> é um universo sombrio
+        onde humanidade e monstros coexistem em uma guerra eterna.
+        Os jogadores exploram ruínas esquecidas, enfrentam criaturas
+        lendárias e coletam recursos raros para criar equipamentos
+        cada vez mais poderosos.
+        <br><br>
+        Cada caça é uma batalha cinematográfica. Cada cicatriz,
+        uma história sobrevivida.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Monster Hunt RPG • “A noite sempre caça de volta.”
+  </footer>
 
 </body>
 </html>
